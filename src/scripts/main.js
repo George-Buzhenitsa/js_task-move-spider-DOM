@@ -1,5 +1,24 @@
 'use strict';
 
 document.addEventListener('click', (e) => {
-  // write code here
+  const spider = document.querySelector('.spider');
+  const wall = document.querySelector('.wall');
+
+  if (e.target.matches('.wall')) {
+    spider.style.top = moveSpider(e.offsetY);
+    spider.style.left = moveSpider(e.offsetX);
+  }
+
+  function moveSpider(direction) {
+    const borgerSize = wall.offsetWidth % wall.clientHeight;
+    const edge = wall.offsetWidth - borgerSize - spider.clientHeight;
+
+    if (direction >= edge) {
+      return edge + 'px';
+    } else if (direction <= spider.clientHeight) {
+      return 0 + 'px';
+    }
+
+    return direction - spider.clientHeight / 2 + 'px';
+  }
 });

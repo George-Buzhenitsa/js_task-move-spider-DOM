@@ -10,7 +10,6 @@ document.addEventListener('click', (e) => {
   }
 
   function moveSpider(direction) {
-    // const borderSize = wall.offsetWidth % wall.clientHeight;
     const edge = wall.clientHeight - spider.clientHeight;
 
     if (direction >= edge) {

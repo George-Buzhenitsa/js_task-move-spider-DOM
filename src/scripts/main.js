@@ -5,19 +5,22 @@ document.addEventListener('click', (e) => {
   const wall = document.querySelector('.wall');
 
   if (e.target.matches('.wall')) {
-    spider.style.top = moveSpider(e.offsetY);
-    spider.style.left = moveSpider(e.offsetX);
+    const { topPosition, leftPosition } = moveSpider(e.offsetY, e.offsetX);
+
+    spider.style.top = topPosition;
+    spider.style.left = leftPosition;
   }
 
-  function moveSpider(direction) {
-    const edge = wall.clientHeight - spider.clientHeight;
+  function moveSpider(y, x) {
+    const maxX = wall.clientWidth - spider.clientWidth;
+    const maxY = wall.clientHeight - spider.clientHeight;
 
-    if (direction >= edge) {
-      return edge + 'px';
-    } else if (direction <= spider.clientHeight) {
-      return 0 + 'px';
-    }
+    const xPosition = Math.max(0, Math.min(x - spider.clientWidth / 2, maxX));
+    const yPosition = Math.max(0, Math.min(y - spider.clientHeight / 2, maxY));
 
-    return direction - spider.clientHeight / 2 + 'px';
+    return {
+      topPosition: yPosition + 'px',
+      leftPosition: xPosition + 'px',
+    };
   }
 });
